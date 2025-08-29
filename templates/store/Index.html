@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'css/Index.css' %}" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <li class="col-1  h-100 d-flex justify-content-center align-items-center"><a class="nav-link" href="{% url 'index' %}">
+            <img class="col-9" src="https://static.dezeen.com/uploads/2025/05/amazon-rebrand-2025_dezeen_2364_col_1-1-852x479.jpg" alt=""></a>
+        </li>
+        <form class="d-flex mx-auto" style="width:50%;">
+            <input class="form-control me-2" type="search" placeholder="Search Amazon">
+            <button class="btn btn-warning" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Hello, Sign in</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Returns & Orders</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <nav class="navbar navbar-expand-md" style="background-color: #232F3E;">
+    <div class="container-fluid">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div id="amazonCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for c in carousels %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{c.image}}" class="d-block w-100" alt="Banner 1">
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#amazonCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#amazonCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+    <!-- Fade overlay -->
+    <div class="carousel-fade-bottom"></div>
+  </div>
+
+<div class="container deals-grid position-relative">
+  {% for row in rows %}
+    
+    <!-- 4 cards in one row -->
+    <div class="row mb-4">
+      {% for card in row.cards %}
+        <div class="col-md-3 mb-3">
+          <div class="card h-100">
+            <h5 class="fw-bold">{{ card.title }}</h5>
+
+            {% if forloop.counter == 4 %}
+              <!-- 4th card = big image --> 
+                <div class="row g-1">
+                  <a href="{% url 'product_card' card.items.first.pk %}" style="text-decoration: none; color: inherit;">
+                    <img src="{{ card.items.first.image }}" alt="Product" style="width: 285px; height: 250px;">
+                  </a>
+                </div>
+            {% else %}
+              <!-- Normal product card -->
+              <div class="row g-1">
+                {% for card_item in card.items.all %}
+                  <div class="col-6">
+                    <a href="{% url 'product_card' card_item.pk %}" style="text-decoration: none; color: inherit;">
+                      <img src="{{ card_item.image }}" alt="{{ card_item.label }}">
+                      <p><small>{{ card_item.label }}</small></p>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- end of 4 cards row -->
+
+    <!-- Now show the 2 carousels linked to this row -->
+    {% for carousel in row.carousels %}
+      <div class="container-fluid" style="width: 100%; margin-bottom: 50px; background-color: white;">
+        <h5>{{ carousel.title }}</h5>
+        <div style="position: relative;">
+          <button 
+            style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 1; border: none; background: #fff; font-size: 20px; padding: 10px; cursor: pointer;" 
+            onclick="document.getElementById('carousel{{ forloop.parentloop.counter }}-{{ forloop.counter }}').scrollBy({ left: -300, behavior: 'smooth' });">
+            &lt;
+          </button>
+
+          <div id="carousel{{ forloop.parentloop.counter }}-{{ forloop.counter }}" class="scroll-row" style="display: flex; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none;">
+            {% for carousel_item in carousel.items.all %}
+            <a href="{% url 'product_carousel' carousel_item.pk %}" style="text-decoration: none; color: inherit;">
+              <img src="{{ carousel_item.image }}" alt="{{ carousel_item.label }}" style="flex: 0 0 auto; width: auto; height: 200px; border-radius: 5px;">
+            </a>
+            {% endfor %}
+          </div>
+
+          <button 
+            style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 1; border: none; background: #fff; font-size: 20px; padding: 10px; cursor: pointer;" 
+            onclick="document.getElementById('carousel{{ forloop.parentloop.counter }}-{{ forloop.counter }}').scrollBy({ left: 300, behavior: 'smooth' });">
+            &gt;
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+    <!-- end of carousels -->
+
+  {% endfor %}
+</div>
+
+
+
+
+  <!-- Sign-in Promo -->
+  <div class="container signin-promo">
+    <h5>See personalized recommendations</h5>
+    <button class="btn btn-warning mt-2">Sign in</button>
+    <p class="mt-2">New customer? <a href="#">Start here.</a></p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-5">
+    <!-- Back to top -->
+    <div class="text-center py-3" style="background-color:#37475a; color:white; cursor:pointer;">
+      <a href="#" class="text-white text-decoration-none">Back to top</a>
+    </div>
+
+    <!-- Link sections -->
+    <div class="container-fluid py-5" style="background-color:#232f3e; color:white;">
+      <div class="row justify-content-center">
+        <div class="col-6 col-md-3 mb-3">
+          <h6 class="fw-bold">Get to Know Us</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Careers</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Press Releases</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Amazon Science</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+          <h6 class="fw-bold">Make Money with Us</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Sell on Amazon</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Affiliate Program</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Advertise Your Products</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Self-Publish with Us</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+          <h6 class="fw-bold">Amazon Payment Products</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Amazon Rewards Visa</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Gift Cards</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Reload Your Balance</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Currency Converter</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
+          <h6 class="fw-bold">Let Us Help You</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Amazon App Download</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Your Account</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Returns Centre</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center py-3" style="background-color:#131a22; color:white;">
+      <div class="mb-2">
+        <img src="https://static.dezeen.com/uploads/2025/05/amazon-rebrand-2025_dezeen_2364_col_1-1-852x479.jpg" width="100px" height="50px" alt="Amazon logo">
+      </div>
+      <div>
+        <a href="#" class="text-white text-decoration-none mx-2">Conditions of Use</a>
+        <a href="#" class="text-white text-decoration-none mx-2">Privacy Notice</a>
+        <a href="#" class="text-white text-decoration-none mx-2">Cookies</a>
+      </div>
+      <p class="mt-2 mb-0">&copy; 2025 Amazon Clone by You</p>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

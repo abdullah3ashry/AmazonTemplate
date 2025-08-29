@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'css/About.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md" style="background-color: white; position: fixed; width: 100%; top:0; z-index: 1050;">
+    <div class="container-fluid">
+        <li class="col-1  h-100 d-flex justify-content-center align-items-center"><a class="nav-link" href="{% url 'index' %}">
+            <img class="col-9" src="https://static.vecteezy.com/system/resources/thumbnails/019/136/319/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg" alt=""></a>
+        </li>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+  </nav>
+  <div id="main">
+    <!-- Hero Section -->
+        <div class="container-fluid text-dark text-start py-5 mt-5" style="padding-bottom: 50px;">
+            <h1>About Us</h1>
+            <p><big>Amazon is guided by four principles: customer obsession rather than competitor focus, passion for invention, commitment to operational excellence, and long-term thinking. We strive to be Earth’s most customer-centric company, Earth’s best employer, and Earth’s safest place to work.</big></p>
+        </div>
+
+        <div class="container-fluid" style="padding-bottom: 50px;">
+        <div class="row">
+            
+            <!-- Left Side Navigation -->
+            <div class="col-md-3 side-nav">
+            <a href="#">What We Do</a>
+            <a href="#">Working at Amazon</a>
+            <a href="#">Leadership Principles</a>
+            <a href="#">Shareholder Letters</a>
+            <a href="#">Reports</a>
+            </div>
+            
+            <!-- Right Side Carousel -->
+            <div class="col-md-9">
+            <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <img style="margin-bottom: 100px;" src="https://assets.aboutamazon.com/12/1e/6d5d42894b688e23b6f7a3f85e26/andy-jassy-leadership-principles-a-to-z-headeroption-3-lp-explained.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-start text-dark bg-light p-3 rounded">
+                    <h5>Amazon CEO Andy Jassy explains Leadership Principles</h5>
+                    <p>Learn 8 things you may not know about Amazon’s Leadership approach.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img style="margin-bottom: 100px;" src="https://assets.aboutamazon.com/65/1c/c4613214426c9c58d7b5c69fe0be/about-amazon-inline-20220720-amazonindy-tg-0437.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-start text-dark bg-light p-3 rounded">
+                    <h5>Working at Amazon</h5>
+                    <p>Discover what makes Amazon a great place to work.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img style="margin-bottom: 100px;" src="https://assets.aboutamazon.com/5c/b5/2f1d03cb4b4492a7b88fb8aab077/2024-shareholderletter-hero-image-final.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-start text-dark bg-light p-3 rounded">
+                    <h5>Shareholder Letters</h5>
+                    <p>Read insights from Amazon’s leadership to its shareholders.</p>
+                    </div>
+                </div>
+
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+                </button>
+            </div>
+            </div>
+
+        </div>
+        </div>
+        <img src="https://assets.aboutamazon.com/32/8c/51e319c047da848b9c820d9373a8/aa-websiteredesign-1360x450-aboutus.png" width="100%">
+
+        <div class="container-fluid text-dark text-start py-5 mt-5" style="padding-bottom: 50px; width: 60%;">
+            <h4>Amazon’s “Day 1” mentality is our approach to doing everything with the energy and entrepreneurial spirit of a new organization on its first day.</h4>
+            <p><big>Working to earn and keep our customers’ trust is the single biggest driver of Amazon’s Day 1 approach. Amazon’s decision-making process asks employees to consider whether an action is a one-way door—consequential and nearly irreversible—or a two-way door, easy to change course and go back. Discover more about who we are through our Leadership Principles.</big></p>
+        </div>
+        <div class="grid">
+            <h2>Learn more about us</h2>
+            {% for item in about_first %}
+                {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                <div class="row g-4" style="padding-bottom: 20px; padding-top: 10px;">
+                {% endif %}
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="deal-card p-3">
+                    <img src="{{ item.image }}" class="deal-img w-100 mb-3">
+                    <h6>{{ item.title }}</h6>
+                    <p>{{ item.description }}</p>
+                    </div>
+                </div>
+
+                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <img src="https://assets.aboutamazon.com/f7/44/df47cb6246098857e946f25467b1/20240823-goodemployer.jpg" width="100%">
+        <div class="container-fluid text-dark text-start py-5 mt-5" style="padding-bottom: 50px; width: 60%;">
+            <h4>We invest in the success of our employees</h4>
+            <p><big>Amazon will spend over $1.2 billion to provide free skills training to employees—helping them further their careers in tech and in-demand roles such as cloud computing. Learn more about how we help our employees grow their skills and careers.</big></p>
+        </div>
+
+        <div class="grid2">
+            <h2>Latest news</h2>
+                {% for item in about_second %}
+                {% if forloop.first or forloop.counter0|divisibleby:4 %}
+                <div class="row g-4" style="padding-bottom: 20px; padding-top: 10px;">
+                {% endif %}
+
+                <div class="col-md-3 col-sm-6">
+                <div class="deal-card p-3">
+                    <img src="{{item.image}}" class="deal-img w-100 mb-3">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.date}}</p>
+                </div>
+                </div>
+
+                {% if forloop.counter|divisibleby:4 or forloop.last %}
+                </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <!-- Back to top -->
+        <div class="text-center py-3" style="background-color:#37475a; color:white; cursor:pointer;">
+        <a href="#" class="text-white text-decoration-none">Back to top</a>
+        </div>
+
+        <!-- Link sections -->
+        <div class="container-fluid py-5" style="background-color:#232f3e; color:white;">
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Get to Know Us</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Careers</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Press Releases</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Amazon Science</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Make Money with Us</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Sell on Amazon</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Affiliate Program</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Advertise Your Products</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Self-Publish with Us</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Amazon Payment Products</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Amazon Rewards Visa</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Gift Cards</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Reload Your Balance</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Currency Converter</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Let Us Help You</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Amazon App Download</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Your Account</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Returns Centre</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Help</a></li>
+            </ul>
+            </div>
+        </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="text-center py-3" style="background-color:#131a22; color:white;">
+        <div class="mb-2">
+            <img src="https://static.dezeen.com/uploads/2025/05/amazon-rebrand-2025_dezeen_2364_col_1-1-852x479.jpg" width="100px" height="50px" alt="Amazon logo">
+        </div>
+        <div>
+            <a href="#" class="text-white text-decoration-none mx-2">Conditions of Use</a>
+            <a href="#" class="text-white text-decoration-none mx-2">Privacy Notice</a>
+            <a href="#" class="text-white text-decoration-none mx-2">Cookies</a>
+        </div>
+        <p class="mt-2 mb-0">&copy; 2025 Amazon Clone by You</p>
+        </div>
+    </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

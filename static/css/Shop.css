@@ -1,0 +1,11 @@
+body { background-color: #f3f3f3; }
+.deal-card { border: 1px solid #ddd; border-radius: 6px; background: #fff; transition: 0.2s; }
+.deal-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.deal-img { height: 180px; object-fit: contain; }
+.deal-discount { color: #b12704; font-weight: bold; }
+.progress { height: 6px; }
+.filter-sidebar { background:#fff; padding:15px; border-radius:6px; }
+a {
+    text-decoration: none;
+    color: black;
+}

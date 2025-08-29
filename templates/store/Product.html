@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'css/Product.css' %}" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #131921;">
+    <div class="container-fluid">
+        <li class="col-1  h-100 d-flex justify-content-center align-items-center"><a class="nav-link" href="{% url 'index' %}">
+            <img class="col-9" src="https://static.dezeen.com/uploads/2025/05/amazon-rebrand-2025_dezeen_2364_col_1-1-852x479.jpg" alt=""></a>
+        </li>
+        <form class="d-flex mx-auto" style="width:50%;">
+            <input class="form-control me-2" type="search" placeholder="Search Amazon">
+            <button class="btn btn-warning" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#" style=" color: white;">Hello, Sign in</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" style=" color: white;">Returns & Orders</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" style=" color: white;">Cart</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <nav class="navbar navbar-expand-md" style="background-color: #232F3E;">
+    <div class="container-fluid">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}" style=" color: white;">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}" style=" color: white;">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}" style=" color: white;">Contact</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <!-- Product Section -->
+  <div class="container product-section">
+    <div class="row g-5">
+      <!-- Product Image -->
+      <div class="col-md-6 product-image">
+        <img src="{{product.image}}" alt="Product" style="height:400px; width:400px; object-fit: contain;">
+      </div>
+      <!-- Product Details -->
+      <div class="col-md-6">
+        <h1 class="mb-3">{{product.name}}</h1>
+        <p class="price">${{product.price}}</p>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.        </p>
+        <ul>
+          <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+          <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
+          <li>when an unknown printer took a galley of type and scrambled it to make a type specimen book.</li>
+        </ul>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <!-- Back to top -->
+        <div class="text-center py-3" style="background-color:#37475a; color:white; cursor:pointer;">
+        <a href="#" class="text-white text-decoration-none">Back to top</a>
+        </div>
+
+        <!-- Link sections -->
+        <div class="container-fluid py-5" style="background-color:#232f3e; color:white;">
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Get to Know Us</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">About Us</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Careers</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Press Releases</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Amazon Science</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Make Money with Us</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Sell on Amazon</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Affiliate Program</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Advertise Your Products</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Self-Publish with Us</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Amazon Payment Products</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Amazon Rewards Visa</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Gift Cards</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Reload Your Balance</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Currency Converter</a></li>
+            </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+            <h6 class="fw-bold">Let Us Help You</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white text-decoration-none">Amazon App Download</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Your Account</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Returns Centre</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Help</a></li>
+            </ul>
+            </div>
+        </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="text-center py-3" style="background-color:#131a22; color:white;">
+        <div class="mb-2">
+            <img src="https://static.dezeen.com/uploads/2025/05/amazon-rebrand-2025_dezeen_2364_col_1-1-852x479.jpg" width="100px" height="50px" alt="Amazon logo">
+        </div>
+        <div>
+            <a href="#" class="text-white text-decoration-none mx-2">Conditions of Use</a>
+            <a href="#" class="text-white text-decoration-none mx-2">Privacy Notice</a>
+            <a href="#" class="text-white text-decoration-none mx-2">Cookies</a>
+        </div>
+        <p class="mt-2 mb-0">&copy; 2025 Amazon Clone by You</p>
+        </div>
+    </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
