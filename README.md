@@ -38,25 +38,28 @@ Provides clear paths for the index, shop, about, and contact pages, along with a
 ```bash
    git clone <repository-url>
    cd <project-directory>
+```
 3. **Environment Setup**:
-
-Bash
+```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 4. **Install Dependencies**:
 
-Bash
+```bash
    pip install django
+```
 5. **Database Migration**:
 
-Bash
+```bash
    python manage.py migrate
+```
 6. **Run the Server**:
 
-Bash
+```bash
    python manage.py runserver
 Navigate to http://127.0.0.1:8000/ to view the application.
-
+```
 Configuration (myproject/settings.py)
 Database: Uses sqlite3 for local development.
 
